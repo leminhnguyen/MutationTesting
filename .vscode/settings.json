@@ -1,0 +1,8 @@
+{
+    "editor.codeActionsOnSave": null,
+    
+    "code-runner.executorMap": {
+        "java": "cd $workspaceRoot && javac -sourcepath src/ -d bin/ $dir/$fileName && java -cp bin/ $fileNameWithoutExt"
+    }
+    
+}
