@@ -232,7 +232,7 @@ public class Genetic {
                                 int signRandom = ( int )( Math.random() * 100 );
                                 if( signRandom%5==0 ) {
                                     value = value * -1;
-                                } //END if STATEMENT
+                                }
                                 solution += value;
                             } else if( token.getToken().equals( "float" ) ) {
                                 int value1 = ( int )( Math.random() * EMConstants.INT_RANGE );
@@ -244,7 +244,7 @@ public class Genetic {
                                 int signRandom = ( int )( Math.random() * 100 );
                                 if( signRandom%5==0 ) {
                                     value1 = value1 * -1;
-                                } //END if STATEMENT
+                                }
                                 solution += value1 + "." + value2;
                             } else if( token.getToken().equals( "char" ) ) {
                                 int value = ( int )( Math.random() * 26 );
@@ -253,7 +253,7 @@ public class Genetic {
                                     value += 65;
                                 } else {
                                     value += 97;
-                                } //END if-else STATEMENT
+                                }
                                 char ch = ( char )value;
                                 solution += "\'" + ch + "\'";
                             } else if( token.getToken().equals( "String" ) ) {
@@ -268,20 +268,20 @@ public class Genetic {
                                         ivalue += 97;
                                     } else {
                                         ivalue += 48;
-                                    } //END if-else STATEMENT
+                                    }
                                     char ch = ( char )ivalue;
                                     value += ch;
-                                } //END for LOOP
+                                }
                                 value += "\"";
                                 solution += value;
-                            } //END if-else STATEMENTS
+                            }
                             mt++;
                             token = ( Token )mTokens.get( mt++ );
                             if( token.getToken().equals( "," ) ) {
                                 solution += ",";
                                 token = ( Token )mTokens.get( mt++ );
-                            } //END if STATEMENT
-                        } //END while LOOP
+                            }
+                        }
                         solution += ");";
                         break FOR;
                     }
@@ -343,7 +343,7 @@ public class Genetic {
                                     value += 65;
                                 } else {
                                     value += 97;
-                                } //END if-else STATEMENT
+                                }
                                 char ch = ( char )value;
                                 solution += "\'" + ch + "\'";
                             } else if( token.getToken().equals( "String" ) ) {
@@ -358,20 +358,20 @@ public class Genetic {
                                         ivalue += 97;
                                     } else {
                                         ivalue += 48;
-                                    } //END if-else STATEMENT
+                                    }
                                     char ch = ( char )ivalue;
                                     value += ch;
-                                } //END for LOOP
+                                }
                                 value += "\"";
                                 solution += value;
-                            } //END if-else STATEMENTS
+                            }
                             mt++;
                             token = ( Token )mTokens.get( mt++ );
                             if( token.getToken().equals( "," ) ) {
                                 solution += ",";
                                 token = ( Token )mTokens.get( mt++ );
-                            } //END if STATEMENT
-                        } //END while LOOP
+                            }
+                        }
                         solution += "); ";
                     }
                 }
@@ -460,6 +460,7 @@ public class Genetic {
     public void generatePopulation(Target target) {
         String path = EMConstants.PROJECT_LOCATION + "/assets/mutants/" + target.getMutationOperator() + "/" + target.getMutantNumber() + "/" + target.getClassName() + ".java";
         String methodUnderTest = retrieveMethodUnderTest(path);
+        System.out.println("Method Test: " + methodUnderTest);
         for(int p=this.population.size(); p<EMConstants.POPULATION_SIZE; p++){
             TestCase testCase = new TestCase();
             String solution = "";
@@ -534,12 +535,11 @@ public class Genetic {
                                 }
                                 char ch = ( char )ivalue;
                                 value += ch;
-                            } //END for LOOP
+                            }
                             value += "\"";
                             solution += value;
-                        } //END if-else STATEMENTS
+                        }
                         mt++;
-                        System.out.println(token.getToken());
                         token = ( Token )mTokens.get(mt++);
                         if( token.getToken().equals( "," ) ) {
                             solution += ",";
@@ -640,7 +640,6 @@ public class Genetic {
             e.printStackTrace();
         }
         String methodName = line.split(Pattern.quote("."))[1];
-        System.out.println(methodName.substring(0, methodName.length()-2));
         return methodName.substring(0, methodName.length()-2);
     }
 
@@ -651,7 +650,7 @@ public class Genetic {
         if(!file.exists()){
             file.mkdirs();
         }
-        System.out.println(classComponents.getFilePath());
+        System.out.println("Program Test: " + classComponents.getFilePath());
         file = new File(targetPath2);
         if(!file.exists()){
             file.mkdirs();
@@ -679,22 +678,21 @@ public class Genetic {
                 rafo.close();
             }
 
-            Runtime.getRuntime().exec( "javac -sourcepath " + targetPath1 + " " + targetPath1 + "/*.java" );
-            System.out.println("javac -sourcepath " + targetPath1 + " " + targetPath1 + "/*.java");
+            EMController.execCmd("find " + targetPath1 + " -name *.java -exec javac -sourcepath " + targetPath1 + " {} +");
+            System.out.println("Target Path: " + targetPath1);
+            //System.out.println("find " + targetPath1 + " -name *.java -exec javac -sourcepath " + targetPath1 + " {} +");
             File d1Check = new File( targetPath1 + "/Driver0.class" );
             int timeout = 1;
             while( !d1Check.exists() && timeout<=EMConstants.GA_TIMEOUT ) {
                 timeout++;
             }
 
-            Runtime.getRuntime().exec( "javac -sourcepath " + targetPath2 + " " + targetPath2 + "/*.java" );
+            Runtime.getRuntime().exec("find " + targetPath2 + " -name *.java -exec javac -sourcepath " + targetPath2 + " {} +");
             File d2Check = new File( targetPath2 + "/Driver0.class" );
             timeout = 1;
             while( !d2Check.exists() && timeout<=EMConstants.GA_TIMEOUT ) {
                 timeout++;
             }
-
-            System.out.println("success run");
         } catch (Exception e) {
             e.printStackTrace();
         }

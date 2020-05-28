@@ -128,36 +128,24 @@ public class ROR extends MutantGenerating {
     }
 
     public static void main(String[] args){
-        // String filePath="Programs/LinearStack/Stack.java";
-        // EMScanner scanner = new EMScanner(new File(filePath));
-        // ClassComponents cc = new ClassComponents(scanner.getTokenList(), filePath);
-        // cc.extractClassComponents(0);
-        // MutantGenerating mg = new MutantGenerating(cc);
-        // ROR ror = new ROR(cc);
-        // System.out.println(ror.generateMutants());
-        // Genetic genetic = new Genetic(cc);
-        // for (int t=0; t<EMConstants.TARGETS.size(); t++){
-        //     Target target = (Target) EMConstants.TARGETS.get(t);
-        //     genetic.generatePopulation(target);
-        //     try {
-        //         genetic.executeTestCase(target); 
-        //     } catch (Exception e) {
-        //         e.printStackTrace();
-        //     }
-            
-        //     System.out.println(genetic.getPopulation().size());
-        //     // for(int i=0; i<genetic.getPopulation().size(); i++){
-        //     //     TestCase testCase = (TestCase) genetic.getPopulation().get(i);
-        //     //     System.out.println(testCase.getTestCase());
-        //     //     System.out.println();
-        //     // }
-        //     break;
-        // }
-        System.out.println("Hello World");
-        try {
-            Runtime.getRuntime().exec("javac -d src/mutants -sourcepath src/ src/mutants/Test.java");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }   
+        String filePath="Programs/LinearStack/Stack.java";
+        EMScanner scanner = new EMScanner(new File(filePath));
+        ClassComponents cc = new ClassComponents(scanner.getTokenList(), filePath);
+        cc.extractClassComponents(0);
+        MutantGenerating mg = new MutantGenerating(cc);
+        ROR ror = new ROR(cc);
+        System.out.println(ror.generateMutants());
+        Genetic genetic = new Genetic(cc);
+        for (int t=0; t<EMConstants.TARGETS.size(); t++){
+            Target target = (Target) EMConstants.TARGETS.get(t);
+            System.out.println("------------------ Execute Target " + t + " ------------------------");
+            genetic.generatePopulation(target);
+            try {
+                genetic.executeTestCase(target); 
+                System.out.println("===>> run successfully\n");
+            } catch (Exception e) {
+                System.out.println("===>> Failed\n");
+            }
+        }
     }
 }
