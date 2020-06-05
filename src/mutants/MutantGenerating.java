@@ -213,5 +213,4 @@ public class MutantGenerating {
         System.out.println(mg.getCodeBeforeMethod());
         
     }
-    
 }

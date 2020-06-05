@@ -539,7 +539,7 @@ public class Genetic {
                             value += "\"";
                             solution += value;
                         }
-                        mt++;
+                        mt++; 
                         token = ( Token )mTokens.get(mt++);
                         if( token.getToken().equals( "," ) ) {
                             solution += ",";
@@ -718,5 +718,4 @@ public class Genetic {
     public ArrayList getPopulation() {
         return this.population;
     }
-    
 }

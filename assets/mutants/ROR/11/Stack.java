@@ -56,10 +56,9 @@ public class Stack {
     public void method4 ( ) {
     }
 
-    //replace == with !=
     public int isEmpty ( ) {
         int result = 0;
-        if ( top != 0 ) {
+        if ( top != 0 ) {//mutated with == with !=
             result = 1;
         }
         return result;

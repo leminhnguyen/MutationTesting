@@ -31,9 +31,8 @@ public class Stack {
     public void method2 ( ) {
     }
 
-    //replace < with >
     public void push ( int el ) {
-        if ( top > size && el > 50 ) {
+        if ( top > size && el > 50 ) {//mutated with < with >
             element = el;
             top = top + 1;
         }

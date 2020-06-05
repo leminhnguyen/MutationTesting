@@ -81,10 +81,9 @@ public class Stack {
     public void method7 ( ) {
     }
 
-    //replace > with !=
     public int clear ( ) {
         if ( top > 2 ) {
-            if ( size != 25 ) {
+            if ( size != 25 ) {//mutated with > with !=
                 size = 0;
                 top = top - top;
             }

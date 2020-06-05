@@ -70,10 +70,9 @@ public class Stack {
     public void method6 ( ) {
     }
 
-    //replace > with !=
     public int onTop ( ) {
         int element = 5;
-        if ( top != 0 ) {
+        if ( top != 0 ) {//mutated with > with !=
             element = element * top;
         }
         return element;

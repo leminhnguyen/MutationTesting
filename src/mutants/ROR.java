@@ -37,12 +37,12 @@ public class ROR extends MutantGenerating {
                 if (token.getDescription().equals("Relational Operator")) {
                     ArrayList remains = getRemainedMO(token.getToken());
                     for (int rt = 0; rt < remains.size(); rt++) {
-                        String mCode = ""; int indentCount = 1;
-                        mCode = mCode + "    //replace " + token.getToken() + " with " + remains.get(rt) + "\n"; 
+                        String mCode = ""; int indentCount = 1; boolean mutated = false;
                         for (int mmt2 = 0; mmt2 < mmTokens.size(); mmt2++) {
                             Token token2 = (Token) mmTokens.get(mmt2);
                             if (mmt2 == mmt) {
                                 mCode = mCode + remains.get(rt) + " ";
+                                mutated = true;
                             } else {
                                 Token prevToken;
                                 if (mmt2 > 0) {
@@ -62,7 +62,12 @@ public class ROR extends MutantGenerating {
                                 } else if (token2.getToken().equals(";") || token2.getToken().equals("{")) {
                                     if (token2.getToken().equals("{")) {
                                         indentCount++;
-                                        mCode = mCode + token2.getToken() + "\n";
+                                        if(mutated){
+                                            mCode = mCode + token2.getToken() + "//mutated with " + token.getToken() + " with " + remains.get(rt) + "\n";
+                                            mutated = false;
+                                        }else{
+                                            mCode = mCode + token2.getToken() + "\n";
+                                        }
                                     } else {
                                         mCode = mCode.substring(0, mCode.length() - 1) + token2.getToken()
                                                 + "\n";

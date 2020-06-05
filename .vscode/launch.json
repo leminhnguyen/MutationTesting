@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Test",
+            "request": "launch",
+            "mainClass": "mutants.Test",
+            "projectName": "MutationTesting2"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Driver0",
             "request": "launch",
             "mainClass": "Driver0",

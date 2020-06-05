@@ -1,0 +1,18 @@
+S: Stack method3 4
+S: Stack method1 1
+S: Stack clear 12
+S: Stack clear 12
+S: Stack method7 11
+S: Stack method1 1
+S: Stack method6 9
+S: Stack isEmpty 7
+S: Stack method6 9
+S: Stack method8 13
+S: Stack method3 4
+S: Stack method4 6
+S: Stack onTop 10
+S: Stack onTop 10
+S: Stack method1 1
+N: false
+
+S: Stack pushStack@4aa298b7

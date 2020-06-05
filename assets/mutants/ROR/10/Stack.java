@@ -41,11 +41,10 @@ public class Stack {
     public void method3 ( ) {
     }
 
-    //replace > with !=
     public int pop ( ) {
         int element = 0;
         if ( top > 2 ) {
-            if ( size != 25 ) {
+            if ( size != 25 ) {//mutated with > with !=
                 top = top - 1;
                 size = size - 1;
                 element = size + top;
