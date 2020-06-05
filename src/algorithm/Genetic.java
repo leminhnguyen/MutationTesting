@@ -680,7 +680,6 @@ public class Genetic {
 
             EMController.execCmd("find " + targetPath1 + " -name *.java -exec javac -sourcepath " + targetPath1 + " {} +");
             System.out.println("Target Path: " + targetPath1);
-            //System.out.println("find " + targetPath1 + " -name *.java -exec javac -sourcepath " + targetPath1 + " {} +");
             File d1Check = new File( targetPath1 + "/Driver0.class" );
             int timeout = 1;
             while( !d1Check.exists() && timeout<=EMConstants.GA_TIMEOUT ) {

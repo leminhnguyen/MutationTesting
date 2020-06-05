@@ -6,7 +6,11 @@ import java.io.LineNumberReader;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
+
+import javax.xml.transform.Source;
+
 import components.*;
+import utils.*;
 
 import components.ClassComponents;
 import utils.EMConstants;
@@ -20,7 +24,7 @@ public class TraceBack{
     }
 
     public TraceBack(ClassComponents classComponents){
-        classComponents = classComponents;
+        this.classComponents = classComponents;
     }
 
     public void trace(String mutationOperator) {
@@ -55,10 +59,10 @@ public class TraceBack{
                     File instDirs = new File( EMConstants.PROJECT_LOCATION + "/assets/instrument/" + mutationOperator + "/" + (md+1) );
                     File oinstDirs = new File( EMConstants.PROJECT_LOCATION + "/assets/oinstrument/" + mutationOperator + "/" + (md+1) );
                     if( !instDirs.exists() ) {
-                        instDirs.mkdir();
+                        instDirs.mkdirs();
                     }
                     if( !oinstDirs.exists() ) {
-                        oinstDirs.mkdir();
+                        oinstDirs.mkdirs();
                     }
                     RandomAccessFile raf = new RandomAccessFile( instDirs.getAbsolutePath() + "/" + codeFile.getName(), "rw" );
                     String line = lnr.readLine();
@@ -1353,5 +1357,13 @@ public class TraceBack{
         return identifier.substring( 0, identifier.length()-1 );
     }
     
+    public static void main(String[] args) {
+        String filePath="Programs/LinearStack/Stack.java";
+        EMScanner scanner = new EMScanner(new File(filePath));
+        ClassComponents cc = new ClassComponents(scanner.getTokenList(), filePath);
+        cc.extractClassComponents(0);
+        TraceBack traceBack = new TraceBack(cc);
+        traceBack.trace("ROR");
+    }
 
 }
