@@ -50,27 +50,19 @@ public class Target {
         this.status = status;
     }
 
-    public boolean isIsSuspicious() {
-        return this.isSuspicious;
-    }
-
     public boolean getIsSuspicious() {
         return this.isSuspicious;
     }
 
-    public void setIsSuspicious(boolean isSuspicious) {
+    public void setSuspicious(boolean isSuspicious) {
         this.isSuspicious = isSuspicious;
-    }
-
-    public boolean isIsAchieved() {
-        return this.isAchieved;
     }
 
     public boolean getIsAchieved() {
         return this.isAchieved;
     }
 
-    public void setIsAchieved(boolean isAchieved) {
+    public void setAchieved(boolean isAchieved) {
         this.isAchieved = isAchieved;
     }
 

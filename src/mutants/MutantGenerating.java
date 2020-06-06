@@ -121,8 +121,14 @@ public class MutantGenerating {
                     }else{
                         prevToken = null;
                     }
-    
-                    if(token.getDescription().equals("Keyword")){
+                    
+                    if(token.getDescription().equals("Relational Operator")){
+                        if(codeBefore.endsWith(" ")){
+                            codeBefore = codeBefore.substring(0, codeBefore.length()-1) + token.getToken();
+                        }else{
+                            codeBefore += token.getToken();
+                        }
+                    }else if(token.getDescription().equals("Keyword")){
                         if (prevToken==null){
                             codeBefore = codeBefore + addIndentation(token, 4*indentCount) + " ";
                         }else if(token.getToken().equals("if") || token.getToken().equals("else") || token.getToken().equals("return")){
@@ -136,6 +142,18 @@ public class MutantGenerating {
                             codeBefore = codeBefore + token.getToken() + "\n";
                         }else{
                             codeBefore = codeBefore.substring(0, codeBefore.length()-1) + token.getToken() + "\n";
+                        }
+                    } else if (token.getToken().equals("(") || token.getToken().equals( "," )){
+                        if(codeBefore.endsWith(" ")){
+                            codeBefore = codeBefore.substring(0, codeBefore.length()-1) + token.getToken() + " ";
+                        }else{
+                            codeBefore += token.getToken() + " ";
+                        }
+                    }else if (token.getToken().equals(")")){
+                        if(codeBefore.endsWith("( ")){
+                            codeBefore = codeBefore.substring(0, codeBefore.length()-1) + token.getToken() + " ";
+                        }else{
+                            codeBefore += token.getToken() + " ";
                         }
                     }else if(token.getToken().equals("}")){
                         indentCount--;
@@ -161,7 +179,13 @@ public class MutantGenerating {
                     prevToken = null;
                 }
 
-                if(token.getDescription().equals("Keyword")){
+                if(token.getDescription().equals("Relational Operator")){
+                    if(codeAfter.endsWith(" ")){
+                        codeAfter = codeAfter.substring(0, codeAfter.length()-1) + token.getToken();
+                    }else{
+                        codeAfter += token.getToken();
+                    }
+                }else if(token.getDescription().equals("Keyword")){
                     if (prevToken==null){
                         codeAfter = codeAfter + addIndentation(token, 4*indentCount) + " ";
                     }else if(token.getToken().equals("if") || token.getToken().equals("else") || token.getToken().equals("return")){
@@ -176,7 +200,21 @@ public class MutantGenerating {
                     }else{
                         codeAfter = codeAfter.substring(0, codeAfter.length()-1) + token.getToken() + "\n";
                     }
-                }else if(token.getToken().equals("}")){
+                } else if (token.getToken().equals("(") || token.getToken().equals( "," )){
+                    if(codeAfter.endsWith(" ")){
+                        codeAfter = codeAfter.substring(0, codeAfter.length()-1) + token.getToken() + " ";
+                    }else{
+                        codeAfter += token.getToken() + " ";
+                    }
+                }else if (token.getToken().equals(")")){
+                    if(codeAfter.endsWith("( ")){
+                        codeAfter = codeAfter.substring(0, codeAfter.length()-1) + token.getToken() + " ";
+                    }else{
+                        codeAfter += token.getToken() + " ";
+                    }
+                }
+                
+                else if(token.getToken().equals("}")){
                     indentCount--;
                     codeAfter = codeAfter + addIndentation(token, 4*indentCount) + "\n";
                 }else{

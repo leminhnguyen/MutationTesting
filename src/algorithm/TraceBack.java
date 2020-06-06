@@ -86,7 +86,7 @@ public class TraceBack{
                                 int approach_level = 1;
                                 boolean ifWhileMutation = false;
                                 do {
-                                    if( line.contains( "//Mutated with" ) && ( line.contains( "if(" ) || line.contains( "while(" ) ) ) {
+                                    if( line.contains( "//mutated with" ) && ( line.contains( "if(" ) || line.contains( "while(" ) ) ) {
                                         conditionCount++;
                                         predicates.add( line );
                                         ifWhileMutation = true;
@@ -96,7 +96,7 @@ public class TraceBack{
                                             conditions.add( "while" );                                                
                                         }
                                     } 
-                                    if( line.contains( "//Mutated with" ) ) {
+                                    if( line.contains( "//mutated with" ) ) {
                                         if( conditionCount==0 ) {
                                             String instrumentedString = "try {\n";
                                             instrumentedString += "java.io.File myFile = new java.io.File( traceFile );\n";
@@ -115,7 +115,7 @@ public class TraceBack{
                                             oinstrumentedString += "java.io.File myFile = new java.io.File( traceFile );\n";
                                             oinstrumentedString += "java.io.RandomAccessFile raf = new java.io.RandomAccessFile( myFile, \"rw\" );\n";
                                             oinstrumentedString += "raf.skipBytes( ( int )myFile.length() );\n";
-                                            if( line.contains( "Mutated with ABS" ) ) {
+                                            if( line.contains( "mutated with ABS" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -128,7 +128,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with AOR" ) ) {
+                                            } else if( line.contains( "mutated with AOR" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -141,7 +141,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with ROR" ) ) {
+                                            } else if( line.contains( "mutated with ROR" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: true\" );\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -154,7 +154,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with LCR" ) ) {
+                                            } else if( line.contains( "mutated with LCR" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: true\" );\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -167,7 +167,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with UOI" ) ) {
+                                            } else if( line.contains( "mutated with UOI" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -180,7 +180,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with JID" ) ) {
+                                            } else if( line.contains( "mutated with JID" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -193,7 +193,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with OMD" ) ) {
+                                            } else if( line.contains( "mutated with OMD" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -206,7 +206,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with IOP" ) ) {
+                                            } else if( line.contains( "mutated with IOP" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -219,7 +219,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with PNC" ) ) {
+                                            } else if( line.contains( "mutated with PNC" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getObject( line ) + ".toString() );\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -232,7 +232,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with EOC" ) ) {
+                                            } else if( line.contains( "mutated with EOC" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: true\" );\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -265,7 +265,7 @@ public class TraceBack{
                                             oinstrumentedString += "java.io.File myFile = new java.io.File( traceFile );\n";
                                             oinstrumentedString += "java.io.RandomAccessFile raf = new java.io.RandomAccessFile( myFile, \"rw\" );\n";
                                             oinstrumentedString += "raf.skipBytes( ( int )myFile.length() );\n";
-                                            if( line.contains( "Mutated with ABS" ) ) {
+                                            if( line.contains( "mutated with ABS" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -278,7 +278,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with AOR" ) ) {
+                                            } else if( line.contains( "mutated with AOR" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -291,7 +291,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with ROR" ) ) {
+                                            } else if( line.contains( "mutated with ROR" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: true\" );\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -304,7 +304,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with LCR" ) ) {
+                                            } else if( line.contains( "mutated with LCR" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: true\" );\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -317,7 +317,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with UOI" ) ) {
+                                            } else if( line.contains( "mutated with UOI" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -330,7 +330,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with JID" ) ) {
+                                            } else if( line.contains( "mutated with JID" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -343,7 +343,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with OMD" ) ) {
+                                            } else if( line.contains( "mutated with OMD" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -356,7 +356,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with IOP" ) ) {
+                                            } else if( line.contains( "mutated with IOP" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getIdentifier( line ) + ");\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -369,7 +369,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with PNC" ) ) {
+                                            } else if( line.contains( "mutated with PNC" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: \" + " + getObject( line ) + ".toString() );\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -382,7 +382,7 @@ public class TraceBack{
                                                 oinstrumentedString += "} catch( Exception e ) { }\n";
                                                 otempList.add( oline );
                                                 otempList.add( oinstrumentedString );
-                                            } else if( line.contains( "Mutated with EOC" ) ) {
+                                            } else if( line.contains( "mutated with EOC" ) ) {
                                                 instrumentedString += "raf.writeBytes( \"N: true\" );\n";
                                                 instrumentedString += "raf.writeBytes( \"/n\" );\n";
                                                 instrumentedString += "raf.close();\n";
@@ -1067,6 +1067,7 @@ public class TraceBack{
                                         oinstrumentedString += "} catch( Exception e ) { }\n";
                                         instrumentedCode += instrumentedString;
                                         oinstrumentedCode += oinstrumentedString;
+                                        System.out.println();
                                     } 
                                     instrumentedCode += line;
                                     instrumentedCode += "\n";
@@ -1082,6 +1083,7 @@ public class TraceBack{
                             } 
                             line = lnr.readLine();
                             oline = olnr.readLine();
+                            System.out.println(line);
                         } while( line!=null );
                         raf.writeBytes( instrumentedCode );
                         raf.close();
@@ -1129,6 +1131,7 @@ public class TraceBack{
                     } 
                 } 
             }
+
         } catch( Exception exception ) {
             exception.printStackTrace();
         }

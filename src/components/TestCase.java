@@ -4,17 +4,17 @@ package components;
 public class TestCase {
     
     private String testCase;
-    private double state_fitness;
-    private int approach_level;
-    private double local_fitness;
-    private String necessity_cost;
-    private String sufficient_cost;
+    private double stateFitness;
+    private int approachLevel;
+    private double localFitness;
+    private String necessityCost;
+    private String sufficiencyCost;
     private String status;
     private boolean hasFitness;
     private double weight;
     private String className;
     private String objectName;
-    private String method;
+    private String method; 
 
     public TestCase(){
         testCase = "";
@@ -26,11 +26,11 @@ public class TestCase {
 
     public TestCase(TestCase tc) {
         this.testCase = tc.testCase;
-        this.state_fitness = tc.state_fitness;
-        this.approach_level = tc.approach_level;
-        this.local_fitness = tc.local_fitness;
-        this.necessity_cost = tc.necessity_cost;
-        this.sufficient_cost = tc.sufficient_cost;
+        this.stateFitness = tc.stateFitness;
+        this.approachLevel = tc.approachLevel;
+        this.localFitness = tc.localFitness;
+        this.necessityCost = tc.necessityCost;
+        this.sufficiencyCost = tc.sufficiencyCost;
         this.status = tc.status;
         this.hasFitness = tc.hasFitness;
         this.weight = tc.weight;
@@ -52,44 +52,45 @@ public class TestCase {
         this.testCase = testCase;
     }
 
+
     public double getStateFitness() {
-        return this.state_fitness;
+        return this.stateFitness;
     }
 
-    public void setStateFitness(double state_fitness) {
-        this.state_fitness = state_fitness;
+    public void setStateFitness(double stateFitness) {
+        this.stateFitness = stateFitness;
     }
 
-    public int getApproach_level() {
-        return this.approach_level;
+    public int getApproachLevel() {
+        return this.approachLevel;
     }
 
-    public void setApproach_level(int approach_level) {
-        this.approach_level = approach_level;
+    public void setApproachLevel(int approachLevel) {
+        this.approachLevel = approachLevel;
     }
 
-    public double getLocal_fitness() {
-        return this.local_fitness;
+    public double getLocalFitness() {
+        return this.localFitness;
     }
 
-    public void setLocal_fitness(double local_fitness) {
-        this.local_fitness = local_fitness;
+    public void setLocalFitness(double localFitness) {
+        this.localFitness = localFitness;
     }
 
-    public String getNecessity_cost() {
-        return this.necessity_cost;
+    public String getNecessityCost() {
+        return this.necessityCost;
     }
 
-    public void setNecessity_cost(String necessity_cost) {
-        this.necessity_cost = necessity_cost;
+    public void setNecessityCost(String necessityCost) {
+        this.necessityCost = necessityCost;
     }
 
-    public String getSufficient_cost() {
-        return this.sufficient_cost;
+    public String getSufficiencyCost() {
+        return this.sufficiencyCost;
     }
 
-    public void setSufficient_cost(String sufficient_cost) {
-        this.sufficient_cost = sufficient_cost;
+    public void setSufficiencyCost(String sufficientCost) {
+        this.sufficiencyCost = sufficientCost;
     }
 
     public String getStatus() {
@@ -100,15 +101,11 @@ public class TestCase {
         this.status = status;
     }
 
-    public boolean isHasFitness() {
+    public boolean getFitness() {
         return this.hasFitness;
     }
 
-    public boolean getHasFitness() {
-        return this.hasFitness;
-    }
-
-    public void setHasFitness(boolean hasFitness) {
+    public void setFitness(boolean hasFitness) {
         this.hasFitness = hasFitness;
     }
 
@@ -143,6 +140,4 @@ public class TestCase {
     public void setMethod(String method) {
         this.method = method;
     }
-
-
 }

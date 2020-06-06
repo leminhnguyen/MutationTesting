@@ -14,9 +14,9 @@ public class EMConstants {
     
     public static int POPULATION_SIZE=20;
     
-    public static int MUTATION_RATE=0;
+    public static int MUTATION_RATE=5;
     
-    public static int MAX_ITERATIONS=0;
+    public static int MAX_ITERATIONS=5;
     
     public static int TOTAL_ITERATIONS=0;
     

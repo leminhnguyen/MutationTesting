@@ -31,7 +31,7 @@ public class Stack {
     }
 
     public void push( int el ) {
-        if( top<size && el>50 ) {
+        if( el>50 ) {
            element = el;
            top = top + 1;
         }

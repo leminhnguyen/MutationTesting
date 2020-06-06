@@ -41,7 +41,11 @@ public class ROR extends MutantGenerating {
                         for (int mmt2 = 0; mmt2 < mmTokens.size(); mmt2++) {
                             Token token2 = (Token) mmTokens.get(mmt2);
                             if (mmt2 == mmt) {
-                                mCode = mCode + remains.get(rt) + " ";
+                                if(mCode.endsWith(" ")){
+                                    mCode = mCode.substring(0, mCode.length()-1) + remains.get(rt);
+                                }else{
+                                    mCode = mCode + remains.get(rt);
+                                }
                                 mutated = true;
                             } else {
                                 Token prevToken;
@@ -51,7 +55,13 @@ public class ROR extends MutantGenerating {
                                     prevToken = null;
                                 }
 
-                                if (token2.getDescription().equals("Keyword")) {
+                                if(token2.getDescription().equals("Relational Operator")){
+                                    if(mCode.endsWith(" ")){
+                                        mCode = mCode.substring(0, mCode.length()-1) + token2.getToken();
+                                    }else{
+                                        mCode += token2.getToken();
+                                    }
+                                }else if (token2.getDescription().equals("Keyword")) {
                                     if (prevToken == null) {
                                         mCode = mCode + addIndentation(token2, 4 * indentCount) + " ";
                                     } else if (token2.getToken().equals("if") || token2.getToken().equals("else") || token2.getToken().equals("return")) {
@@ -63,16 +73,28 @@ public class ROR extends MutantGenerating {
                                     if (token2.getToken().equals("{")) {
                                         indentCount++;
                                         if(mutated){
-                                            mCode = mCode + token2.getToken() + "//mutated with " + token.getToken() + " with " + remains.get(rt) + "\n";
+                                            mCode = mCode + token2.getToken() + "//mutated with ROR" + "\n";
                                             mutated = false;
                                         }else{
                                             mCode = mCode + token2.getToken() + "\n";
                                         }
                                     } else {
-                                        mCode = mCode.substring(0, mCode.length() - 1) + token2.getToken()
-                                                + "\n";
+                                        mCode = mCode.substring(0, mCode.length() - 1) + token2.getToken() + "\n";
                                     }
-                                } else if (token2.getToken().equals("}")) {
+                                } else if (token2.getToken().equals("(") || token2.getToken().equals( "," )){
+                                    if(mCode.endsWith(" ")){
+                                        mCode = mCode.substring(0, mCode.length()-1) + token2.getToken() + " ";
+                                    }else{
+                                        mCode += token2.getToken() + " ";
+                                    }
+                                }else if (token2.getToken().equals(")")){
+                                    if(mCode.endsWith("( ")){
+                                        mCode = mCode.substring(0, mCode.length()-1) + token2.getToken() + " ";
+                                    }else{
+                                        mCode += token2.getToken() + " ";
+                                    }
+
+                                }else if (token2.getToken().equals("}")) {
                                     indentCount--;
                                     mCode = mCode + addIndentation(token2, 4 * indentCount) + "\n";
                                 } else {
@@ -85,6 +107,7 @@ public class ROR extends MutantGenerating {
                                 }
                             }
                         }
+                        mCode += "\n";
 
                         mutantNumber++;
                         Target target = new Target();
@@ -140,17 +163,17 @@ public class ROR extends MutantGenerating {
         MutantGenerating mg = new MutantGenerating(cc);
         ROR ror = new ROR(cc);
         System.out.println(ror.generateMutants());
-        Genetic genetic = new Genetic(cc);
-        for (int t=0; t<EMConstants.TARGETS.size(); t++){
-            Target target = (Target) EMConstants.TARGETS.get(t);
-            System.out.println("------------------ Execute Target " + t + " ------------------------");
-            genetic.generatePopulation(target);
-            try {
-                genetic.executeTestCase(target); 
-                System.out.println("===>> run successfully\n");
-            } catch (Exception e) {
-                System.out.println("===>> Failed\n");
-            }
-        }
+        //Genetic genetic = new Genetic(cc);
+        // for (int t=0; t<EMConstants.TARGETS.size(); t++){
+        //     Target target = (Target) EMConstants.TARGETS.get(t);
+        //     System.out.println("------------------ Execute Target " + t + " ------------------------");
+        //     genetic.generatePopulation(target);
+        //     try {
+        //         genetic.executeTestCase(target); 
+        //         System.out.println("===>> run successfully\n");
+        //     } catch (Exception e) {
+        //         System.out.println("===>> Failed\n");
+        //     }
+        // }
     }
 }
