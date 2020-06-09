@@ -10,6 +10,16 @@ public class Linear {
     public Linear() {
        size = -1;
     }
+
+    public String method1() {
+        if(traceFile.equals("EOC")){
+            return "EOC";
+        } 
+        if (traceFile == "ROR"){
+            return "ROR";
+        }
+        return "";
+    }
     
     public void setSize( int s ) {
        size = s;

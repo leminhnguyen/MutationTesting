@@ -12,7 +12,7 @@ public class EMConstants {
     
     public static ArrayList MUTATION_OPERATORS = new ArrayList();
     
-    public static int POPULATION_SIZE=20;
+    public static int POPULATION_SIZE=10;
     
     public static int MUTATION_RATE=5;
     
@@ -34,7 +34,7 @@ public class EMConstants {
     
     public static long TIME_END=0;
     
-    public static int INT_RANGE = 50;
+    public static int INT_RANGE = 100;
     
     public static int CHAR_RANGE = 6;
     
@@ -52,7 +52,7 @@ public class EMConstants {
     
     public static double OLD_POPULATION_RATE = 0.2;
     
-    public static int METHOD_CLASS_SEQUENCE_COUNT = 20;
+    public static int METHOD_CLASS_SEQUENCE_COUNT = 10;
     
 }
 

@@ -143,7 +143,13 @@ public class MutantGenerating {
                         }else{
                             codeBefore = codeBefore.substring(0, codeBefore.length()-1) + token.getToken() + "\n";
                         }
-                    } else if (token.getToken().equals("(") || token.getToken().equals( "," )){
+                    } else if(token.getToken().equals(".")) {
+                        if(codeBefore.endsWith(" ")){
+                            codeBefore = codeBefore.substring(0, codeBefore.length()-1) + token.getToken();
+                        }else{
+                            codeBefore += token.getToken();
+                        }
+                    }else if (token.getToken().equals("(") || token.getToken().equals( "," )){
                         if(codeBefore.endsWith(" ")){
                             codeBefore = codeBefore.substring(0, codeBefore.length()-1) + token.getToken() + " ";
                         }else{
@@ -200,7 +206,13 @@ public class MutantGenerating {
                     }else{
                         codeAfter = codeAfter.substring(0, codeAfter.length()-1) + token.getToken() + "\n";
                     }
-                } else if (token.getToken().equals("(") || token.getToken().equals( "," )){
+                } else if(token.getToken().equals(".")) {
+                    if(codeAfter.endsWith(" ")){
+                        codeAfter = codeAfter.substring(0, codeAfter.length()-1) + token.getToken();
+                    }else{
+                        codeAfter += token.getToken();
+                    }
+                }else if (token.getToken().equals("(") || token.getToken().equals( "," )){
                     if(codeAfter.endsWith(" ")){
                         codeAfter = codeAfter.substring(0, codeAfter.length()-1) + token.getToken() + " ";
                     }else{

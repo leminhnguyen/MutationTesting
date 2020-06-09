@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - EOC",
+            "request": "launch",
+            "mainClass": "mutants.EOC",
+            "projectName": "MutationTesting2"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - TraceBack",
             "request": "launch",
             "mainClass": "algorithm.TraceBack",

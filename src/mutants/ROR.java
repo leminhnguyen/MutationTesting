@@ -128,7 +128,7 @@ public class ROR extends MutantGenerating {
                                                 super.getCodeBeforeMethod() + codeBefore + mCode + codeAfter + "}";
                             raf.writeBytes(fullCode);
                         } catch (Exception e) {
-                            e.printStackTrace();
+                            ;
                         }
                     }
                 }
@@ -156,13 +156,13 @@ public class ROR extends MutantGenerating {
     }
 
     public static void main(String[] args){
-        String filePath="Programs/LinearStack/Stack.java";
-        EMScanner scanner = new EMScanner(new File(filePath));
-        ClassComponents cc = new ClassComponents(scanner.getTokenList(), filePath);
-        cc.extractClassComponents(0);
-        MutantGenerating mg = new MutantGenerating(cc);
-        ROR ror = new ROR(cc);
-        System.out.println(ror.generateMutants());
+        // String filePath="Programs/LinearStack/Stack.java";
+        // EMScanner scanner = new EMScanner(new File(filePath));
+        // ClassComponents cc = new ClassComponents(scanner.getTokenList(), filePath);
+        // cc.extractClassComponents(0);
+        // MutantGenerating mg = new MutantGenerating(cc);
+        // ROR ror = new ROR(cc);
+        // System.out.println(ror.generateMutants());
         //Genetic genetic = new Genetic(cc);
         // for (int t=0; t<EMConstants.TARGETS.size(); t++){
         //     Target target = (Target) EMConstants.TARGETS.get(t);
@@ -175,5 +175,7 @@ public class ROR extends MutantGenerating {
         //         System.out.println("===>> Failed\n");
         //     }
         // }
+        String str = "hello";
+        System.out.println(str=="hello");
     }
 }

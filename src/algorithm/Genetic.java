@@ -184,10 +184,10 @@ public class Genetic {
             population.add(testCase);
         }
 
-        for (int tp = twentyPercent; (tp < tempPopulation.size()
-                && this.population.size() < EMConstants.POPULATION_SIZE);) {
+        for (int tp = twentyPercent; (tp < tempPopulation.size() && this.population.size() < EMConstants.POPULATION_SIZE);) {
             TestCase testCase = (TestCase) tempPopulation.get(tp);
             tempPopulation.remove(testCase);
+            System.out.println("Original TestCase:\n" + testCase.toString());
             // if fitness == 0 then we just need to mutate the parameters
             if (testCase.getStateFitness() == 0.0) {
                 ArrayList newTest = new ArrayList();
@@ -282,7 +282,7 @@ public class Genetic {
                         break FOR;
                     }
                 }
-
+                System.out.println("Mutated TestCase:\n" + solution);
                 testCase.setTestCase(solution);
                 this.population.add(testCase);
             } else {
@@ -467,7 +467,7 @@ public class Genetic {
             testCase.setObjectName(objectName);
             testCase.setMethod(methodUnderTest);
 
-            solution += className + " " + objectName + " = new " + className + "();";
+            solution += className + " " + objectName + " = new " + className + "(); ";
             int methodCallSeqCount = (int) (Math.random() * EMConstants.METHOD_CLASS_SEQUENCE_COUNT);
 
             // random calls sequence
@@ -634,17 +634,15 @@ public class Genetic {
             LineNumberReader lnr = new LineNumberReader(new FileReader(path));
             line = lnr.readLine();
         } catch (Exception e) {
-            e.printStackTrace();
+            ;
         }
         String methodName = line.split(Pattern.quote("."))[1];
         return methodName.substring(0, methodName.length() - 2);
     }
 
     public void executeTestCase() throws IOException {
-        String targetPath1 = EMConstants.PROJECT_LOCATION + "/assets/instrument/" + target.getMutationOperator() + "/"
-                + target.getMutantNumber();
-        String targetPath2 = EMConstants.PROJECT_LOCATION + "/assets/oinstrument/" + target.getMutationOperator() + "/"
-                + target.getMutantNumber();
+        String targetPath1 = EMConstants.PROJECT_LOCATION + "/assets/instrument/" + target.getMutationOperator() + "/" + target.getMutantNumber();
+        String targetPath2 = EMConstants.PROJECT_LOCATION + "/assets/oinstrument/" + target.getMutationOperator() + "/" + target.getMutantNumber();
         File file = new File(targetPath1);
         if (!file.exists()) {
             file.mkdirs();
@@ -654,12 +652,6 @@ public class Genetic {
         if (!file.exists()) {
             file.mkdirs();
         }
-        // EMController.copyDirectory(new File(classComponents.getFilePath()), new
-        // File(targetPath1 + "/" + classComponents.getClassHeader().getClassName() +
-        // ".java"));
-        // EMController.copyDirectory(new File(classComponents.getFilePath()), new
-        // File(targetPath2 + "/" + classComponents.getClassHeader().getClassName() +
-        // ".java"));
 
         try {
             for (int t = 0; t < this.population.size(); t++) {
@@ -681,8 +673,7 @@ public class Genetic {
                 rafo.close();
             }
 
-            EMController
-                    .execCmd("find " + targetPath1 + " -name *.java -exec javac -sourcepath " + targetPath1 + " {} +");
+            EMController.execCmd("find " + targetPath1 + " -name *.java -exec javac -sourcepath " + targetPath1 + " {} +");
             System.out.println("Target Path: " + targetPath1);
             File d1Check = new File(targetPath1 + "/TestCase0.class");
             int timeout = 1;
@@ -690,8 +681,7 @@ public class Genetic {
                 timeout++;
             }
 
-            EMController
-                    .execCmd("find " + targetPath2 + " -name *.java -exec javac -sourcepath " + targetPath2 + " {} +");
+            EMController.execCmd("find " + targetPath2 + " -name *.java -exec javac -sourcepath " + targetPath2 + " {} +");
             File d2Check = new File(targetPath2 + "/TestCase0.class");
             timeout = 1;
             while (!d2Check.exists() && timeout <= EMConstants.GA_TIMEOUT) {
@@ -700,10 +690,8 @@ public class Genetic {
 
             for (int t = 0; t < this.population.size(); t++) {
 
-                String ITraceFile = EMConstants.PROJECT_LOCATION + "/assets/traces/" + target.getMutationOperator()
-                        + "/" + target.getMutantNumber();
-                String OTraceFile = EMConstants.PROJECT_LOCATION + "/assets/traces/" + target.getMutationOperator()
-                        + "/" + target.getMutantNumber();
+                String ITraceFile = EMConstants.PROJECT_LOCATION + "/assets/traces/" + target.getMutationOperator() + "/" + target.getMutantNumber();
+                String OTraceFile = EMConstants.PROJECT_LOCATION + "/assets/traces/" + target.getMutationOperator() + "/" + target.getMutantNumber();
                 File iFile = new File(ITraceFile);
                 File oFile = new File(OTraceFile);
                 if (!iFile.exists()) {
@@ -752,7 +740,7 @@ public class Genetic {
                 driverOC.delete();
             }
         } catch (Exception e) {
-            e.printStackTrace();
+           
         }
     }
 
@@ -910,6 +898,7 @@ public class Genetic {
                                             EMConstants.EFFECTIVE_TESTCASES.add(testCase);
                                             testCase.setWeight(testCase.getWeight() - (testCase.getApproachLevel()
                                                     + testCase.getLocalFitness() + testCase.getStateFitness()));
+                                            System.out.println("Killed mutant weight: " + testCase.getWeight());
                                             break FOR;
                                         }
 
@@ -985,7 +974,7 @@ public class Genetic {
                 System.out.println("TestCase-" + (t+1) + "'s weight: " + testCase.getWeight());
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            ;
         }
         this.traceNumber += this.population.size();
 
@@ -998,7 +987,7 @@ public class Genetic {
                 }
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
+            
         }
     }
 
@@ -1032,10 +1021,10 @@ public class Genetic {
                 return true;
             }else{
                 if(i%EMConstants.MUTATION_RATE==0){
-                    System.out.println("Mutate Population");
+                    System.out.println("\nMutating Population");
                     mutatePopulation();
                 }else{
-                    System.out.println("Regenerating new test cases with crossover...");
+                    System.out.println("\nRegenerating new test cases with crossover...");
                     performTournamentSelection();
                     crossoverPopulation();
                 }
