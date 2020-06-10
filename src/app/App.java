@@ -13,7 +13,7 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         // scan tokens
-        String filePath="Programs/LinearStack/Stack.java";
+        String filePath="Programs/HashTable/HashTable.java";
         EMScanner scanner = new EMScanner(new File(filePath));
         ClassComponents cc = new ClassComponents(scanner.getTokenList(), filePath);
         cc.extractClassComponents(0);
@@ -28,24 +28,23 @@ public class App {
         traceBack.trace("ROR");
 
         // execute GA algorithm to kill mutants
-        try {
-            int count=0;
-            for (int t=0; t<EMConstants.TARGETS.size(); ){
-                Target target = (Target) EMConstants.TARGETS.get(t);
-                Genetic genetic = new Genetic(cc, target);
-                System.out.println("------------------ Execute Target " + (count+1) + " ------------------------");
-                boolean res = genetic.executeGA();
-                if(res){
-                    System.out.println("Mutant has been killed\n");
-                }else{
-                    System.out.println("Mutant alive\n");
-                    t++;
-                }
-                count++;
+        
+        int count=0;
+        for (int t=0; t<EMConstants.TARGETS.size(); ){
+            Target target = (Target) EMConstants.TARGETS.get(t);
+            Genetic genetic = new Genetic(cc, target);
+            System.out.println("------------------ Execute Target " + (count+1) + " ------------------------");
+            boolean res = genetic.executeGA();
+            if(res){
+                System.out.println("Mutant has been killed\n");
+            }else{
+                System.out.println("Mutant alive\n");
+                t++;
             }
-        } catch (Exception e) {
-            
+            count++;
+            System.out.println("Mutant Score: " + (float) EMConstants.ACHIEVED_TARGETS.size()/(EMConstants.ACHIEVED_TARGETS.size()+EMConstants.TARGETS.size()));
         }
+        
 
         System.out.println("Mutant Score: " + (float) EMConstants.ACHIEVED_TARGETS.size()/(EMConstants.ACHIEVED_TARGETS.size()+EMConstants.TARGETS.size()));
     }
