@@ -1,7 +1,6 @@
 public class HashTable {
     
     private int size;
-    
     private int element;
     private int length;
     

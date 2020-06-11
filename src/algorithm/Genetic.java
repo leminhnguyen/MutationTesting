@@ -28,6 +28,7 @@ public class Genetic {
     }
 
     public void performTournamentSelection() {
+        System.out.println("\nExecuting perform tournament selection");
         int currentPopulation = this.population.size();
         int twentyPercent = (int) (currentPopulation * EMConstants.OLD_POPULATION_RATE);
         selectedPopulation.clear();
@@ -93,11 +94,15 @@ public class Genetic {
             }
         }
     }
-
+    
     public void crossoverPopulation() {
+        System.out.println("\nExecuting crossover");
         for (int sp = 0, sp2 = (selectedPopulation.size() - 1); sp <= sp2; sp++, sp2--) {
             TestCase testCase1 = (TestCase) selectedPopulation.get(sp);
             TestCase testCase2 = (TestCase) selectedPopulation.get(sp2);
+            System.out.println("\nBefore crossover:");
+            System.out.println(testCase1.getTestCase());
+            System.out.println(testCase2.getTestCase());
 
             if (testCase1.getTestCase().equals(testCase2.getTestCase())) {
                 int random = (int) (selectedPopulation.size() * Math.random());
@@ -151,6 +156,9 @@ public class Genetic {
 
             testCase1.setTestCase(newTestCase1);
             testCase2.setTestCase(newTestCase2);
+            System.out.println("\nAfter crossover");
+            System.out.println(testCase1.getTestCase());
+            System.out.println(testCase2.getTestCase());
         }
 
         this.population.clear();
@@ -282,7 +290,7 @@ public class Genetic {
                         break FOR;
                     }
                 }
-                System.out.println("Mutated TestCase:\n" + solution);
+                System.out.println("\nMutated TestCase with parameters:\n" + solution);
                 testCase.setTestCase(solution);
                 this.population.add(testCase);
             } else {
@@ -447,6 +455,8 @@ public class Genetic {
                         break FOR;
                     }
                 }
+                System.out.println("\nMutated TestCase by removing randomly:");
+                System.out.println(solution);
                 testCase.setTestCase(solution);
                 this.population.add(testCase);
             }
@@ -454,6 +464,7 @@ public class Genetic {
     }
 
     public void generatePopulation() {
+        System.out.println("\ngenerating population ....");
         String path = EMConstants.PROJECT_LOCATION + "/assets/mutants/" + target.getMutationOperator() + "/"
                 + target.getMutantNumber() + "/" + target.getClassName() + ".java";
         String methodUnderTest = retrieveMethodUnderTest(path);
@@ -537,11 +548,16 @@ public class Genetic {
                             solution += value;
                         }
                         mt++;
-                        token = (Token) mTokens.get(mt++);
-                        if (token.getToken().equals(",")) {
-                            solution += ",";
-                            token = (Token) mTokens.get(mt++);
+                        try {
+                            token = (Token) mTokens.get(mt);
+                            if (token.getToken().equals(",")) {
+                                solution += ",";
+                                token = (Token) mTokens.get(++mt);
+                            }
+                        } catch (Exception e) {
+                           e.printStackTrace();
                         }
+                        
                     }
                     solution += "); ";
                 }
@@ -745,6 +761,7 @@ public class Genetic {
     }
 
     public void evaluateTestCases() {
+        System.out.println("Evaluating TestCase");
         for (int t = 0; t < this.population.size(); t++) {
             TestCase testCase = (TestCase) this.population.get(t);
             testCase.setWeight(0.0);
@@ -898,7 +915,8 @@ public class Genetic {
                                             EMConstants.EFFECTIVE_TESTCASES.add(testCase);
                                             testCase.setWeight(testCase.getWeight() - (testCase.getApproachLevel()
                                                     + testCase.getLocalFitness() + testCase.getStateFitness()));
-                                            System.out.println("Killed mutant weight: " + testCase.getWeight());
+                                            System.out.println("Best TestCase: " + testCase.getTestCase());
+                                            System.out.println("TestCase's Weight " + testCase.getWeight());
                                             break FOR;
                                         }
 
@@ -1032,4 +1050,5 @@ public class Genetic {
         }
         return false;
     }
+
 }

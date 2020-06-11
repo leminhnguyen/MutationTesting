@@ -25,7 +25,10 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
+        // setup project
         App.setup();
+
+        long startTime = System.currentTimeMillis();
 
         // scan tokens
         String filePath="Programs/LinearStack/Stack.java";
@@ -43,24 +46,31 @@ public class App {
         traceBack.trace("ROR");
 
         // execute GA algorithm to kill mutants
-        
-        int count=0;
+        int count=0; float mutationScore=0;
         for (int t=0; t<EMConstants.TARGETS.size(); ){
             Target target = (Target) EMConstants.TARGETS.get(t);
             Genetic genetic = new Genetic(cc, target);
-            System.out.println("------------------ Execute Target " + (count+1) + " ------------------------");
+            System.out.println("------------------ Try to kill Target " + (count+1) + " ------------------------");
             boolean res = genetic.executeGA();
             if(res){
-                System.out.println("Mutant has been killed\n");
+                System.out.println("Mutant has been killed");
             }else{
-                System.out.println("Mutant alive\n");
+                System.out.println("Mutant alive");
                 t++;
             }
             count++;
-            System.out.println("Mutant Score: " + (float) EMConstants.ACHIEVED_TARGETS.size()/(EMConstants.ACHIEVED_TARGETS.size()+EMConstants.TARGETS.size()));
+            mutationScore = (float) EMConstants.ACHIEVED_TARGETS.size()/(EMConstants.ACHIEVED_TARGETS.size()+EMConstants.TARGETS.size());
+            System.out.println("Mutant Score: " + mutationScore + "\n");
         }
-        
 
-        System.out.println("Mutant Score: " + (float) EMConstants.ACHIEVED_TARGETS.size()/(EMConstants.ACHIEVED_TARGETS.size()+EMConstants.TARGETS.size()));
+        long endTime = System.currentTimeMillis();
+
+        System.out.println("\n------------Result----------------");
+        System.out.println("Total Time: " + (float)(endTime-startTime)/1000 + "s");
+        System.out.println("The numbers of testcases: " + EMConstants.POPULATION_SIZE);
+        System.out.println("Max iterations: " + EMConstants.MAX_ITERATIONS);
+        System.out.println("Mutation rate: " + (float) (EMConstants.MAX_ITERATIONS/EMConstants.MUTATION_RATE)*10 + "%");
+        System.out.println("Final mutant score: " + mutationScore);
+
     }
 }
