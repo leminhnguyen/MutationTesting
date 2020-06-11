@@ -5,15 +5,30 @@ import mutants.*;
 import utils.*;
 
 import java.io.File;
+import java.io.IOException;
 
 import algorithm.*;
 
 public class App {
 
+    public static void setup() {
+        try{
+            Runtime.getRuntime().exec(new String[] { System.getenv("SHELL"), "-c", "rm -r assets/instrument/*" });
+            Runtime.getRuntime().exec(new String[] { System.getenv("SHELL"), "-c", "rm -r assets/oinstrument/*" });
+            Runtime.getRuntime().exec(new String[] { System.getenv("SHELL"), "-c", "rm -r assets/mutants/*" });
+            Runtime.getRuntime().exec(new String[] { System.getenv("SHELL"), "-c", "rm -r assets/traces/*" });
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+
     public static void main(String[] args) throws Exception {
 
+        App.setup();
+
         // scan tokens
-        String filePath="Programs/HashTable/HashTable.java";
+        String filePath="Programs/LinearStack/Stack.java";
         EMScanner scanner = new EMScanner(new File(filePath));
         ClassComponents cc = new ClassComponents(scanner.getTokenList(), filePath);
         cc.extractClassComponents(0);
