@@ -12,11 +12,11 @@ public class EMConstants {
     
     public static ArrayList MUTATION_OPERATORS = new ArrayList();
     
-    public static int POPULATION_SIZE=10;
+    public static int POPULATION_SIZE=20;
     
-    public static int MUTATION_RATE=5;
+    public static int MUTATION_RATE=3;
     
-    public static int MAX_ITERATIONS=5;
+    public static int MAX_ITERATIONS=6;
     
     public static int TOTAL_ITERATIONS=0;
     
