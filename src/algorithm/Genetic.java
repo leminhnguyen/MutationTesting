@@ -94,7 +94,7 @@ public class Genetic {
             }
         }
     }
-
+    
     public void crossoverPopulation() {
         System.out.println("\nExecuting crossover");
         for (int sp = 0, sp2 = (selectedPopulation.size() - 1); sp <= sp2; sp++, sp2--) {
@@ -291,7 +291,11 @@ public class Genetic {
                         break FOR;
                     }
                 }
+<<<<<<< HEAD
                 System.out.println("\nMutated TestCase with parameterw:\n" + solution);
+=======
+                System.out.println("\nMutated TestCase with parameters:\n" + solution);
+>>>>>>> 57a3cbe34a12f210e56ce2a09e149f5fce06275b
                 testCase.setTestCase(solution);
                 this.population.add(testCase);
             } else {
@@ -456,7 +460,12 @@ public class Genetic {
                         break FOR;
                     }
                 }
+<<<<<<< HEAD
                 System.out.println("\nMutated TestCase by removing randomly:\n" + solution);
+=======
+                System.out.println("\nMutated TestCase by removing randomly:");
+                System.out.println(solution);
+>>>>>>> 57a3cbe34a12f210e56ce2a09e149f5fce06275b
                 testCase.setTestCase(solution);
                 this.population.add(testCase);
             }
@@ -548,11 +557,16 @@ public class Genetic {
                             solution += value;
                         }
                         mt++;
-                        token = (Token) mTokens.get(mt++);
-                        if (token.getToken().equals(",")) {
-                            solution += ",";
-                            token = (Token) mTokens.get(mt++);
+                        try {
+                            token = (Token) mTokens.get(mt);
+                            if (token.getToken().equals(",")) {
+                                solution += ",";
+                                token = (Token) mTokens.get(++mt);
+                            }
+                        } catch (Exception e) {
+                           e.printStackTrace();
                         }
+                        
                     }
                     solution += "); ";
                 }
@@ -1045,4 +1059,5 @@ public class Genetic {
         }
         return false;
     }
+
 }

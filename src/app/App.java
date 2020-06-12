@@ -45,12 +45,11 @@ public class App {
         traceBack.trace("ROR");
 
         // execute GA algorithm to kill mutants
-        
         int count=0; float mutationScore=0;
         for (int t=0; t<EMConstants.TARGETS.size(); ){
             Target target = (Target) EMConstants.TARGETS.get(t);
             Genetic genetic = new Genetic(cc, target);
-            System.out.println("------------------ Execute Target " + (count+1) + " ------------------------");
+            System.out.println("------------------ Try to kill Target " + (count+1) + " ------------------------");
             boolean res = genetic.executeGA();
             if(res){
                 System.out.println("Mutant has been killed");
@@ -60,9 +59,11 @@ public class App {
             }
             count++;
             mutationScore = (float) EMConstants.ACHIEVED_TARGETS.size()/(EMConstants.ACHIEVED_TARGETS.size()+EMConstants.TARGETS.size());
-            System.out.println("Mutant Score: " + (float) EMConstants.ACHIEVED_TARGETS.size()/(EMConstants.ACHIEVED_TARGETS.size()+EMConstants.TARGETS.size()) + "\n");
+            System.out.println("Mutant Score: " + mutationScore + "\n");
         }
         
+
+        long endTime = System.currentTimeMillis();
 
         long endTime = System.currentTimeMillis();
 
